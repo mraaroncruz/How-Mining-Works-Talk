@@ -4,8 +4,13 @@ require_relative "crypto"
 
 class Wallet
   attr_reader :pub_key, :priv_key
-  def initialize
-    @priv_key, @pub_key = Crypto.generate_key_pair
+  def initialize(priv_key = nil, pub_key = nil)
+    if priv_key.nil?
+      @priv_key, @pub_key = Crypto.generate_key_pair
+    else
+      @priv_key = priv_key
+      @pub_key = pub_key
+    end
   end
 
   def address

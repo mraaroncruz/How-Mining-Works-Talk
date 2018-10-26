@@ -1,10 +1,9 @@
+require_relative "serializable"
+
 class BlockChain
+  include Serializable
   attr_reader :blocks
   attr_accessor :target
-
-  def self.load(serialized)
-    Marshal.load(serialized)
-  end
 
   def initialize(wallet, initial_target=2, start_amount=10_000_000)
     @target = initial_target
@@ -22,10 +21,6 @@ class BlockChain
     @blocks << block
     puts block.to_s
     block
-  end
-
-  def marshal
-    Marshal.dump(self)
   end
 
   def valid?

@@ -5,13 +5,35 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
+    colorize (0.8.1)
+    concurrent-ruby (1.0.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    dotenv (2.5.0)
     equalizer (0.0.11)
+    faraday (0.15.3)
+      multipart-post (>= 1.2, < 3)
     ice_nine (0.11.2)
+    method_source (0.9.0)
+    multipart-post (2.0.0)
+    mustermann (1.0.3)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    puma (3.12.0)
+    rack (2.0.5)
+    rack-protection (2.0.4)
+      rack
+    sinatra (2.0.4)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.4)
+      tilt (~> 2.0)
     thread_safe (0.3.6)
+    tilt (2.0.8)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -22,6 +44,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  colorize
+  concurrent-ruby
+  dotenv
+  faraday
+  pry
+  puma
+  sinatra
   virtus
 
 BUNDLED WITH

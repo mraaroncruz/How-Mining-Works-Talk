@@ -1,9 +1,12 @@
 require "virtus"
 require "base64"
 require_relative "crypto"
+require_relative "serializable"
 
 class Transaction
+  include Serializable
   include Virtus.model
+
   attribute :to, String
   attribute :from, String
   attribute :amount, Integer

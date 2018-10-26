@@ -2,8 +2,11 @@ require "colorize"
 require "digest"
 require_relative "crypto"
 require_relative "transaction"
+require_relative "serializable"
 
 class Block
+  include Serializable
+
   attr_reader :own_hash, :prev_block_hash, :trx, :target
 
   def self.create_genesis_block(genesis_trx, initial_target=1)
