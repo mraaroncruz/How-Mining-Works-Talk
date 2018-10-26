@@ -4,23 +4,6 @@ require_relative "helpers"
 require_relative "types"
 extend Helpers
 
-# Set up Globals
-$hostname = ENV.fetch("HOSTNAME")
-peers = ENV.fetch("SEED") { "" }.split(",").reject { |peer| peer == $hostname }
-$peers = Concurrent::Array.new(peers)
-$transaction_pool = Concurrent::Array.new
-$graylist = []
-
-if $hostname == "master"
-  $wallet = Wallet.new
-  $blockchain = BlockChain.new($wallet)
-  # For demo convenience
-  puts "Wallet pubic key is #{$wallet.pub_key}".blue
-  File.write("/keys/key.pub", $wallet.pub_key)
-  puts "Wallet private key is #{$wallet.priv_key}".green
-  File.write("/keys/key", $wallet.priv_key)
-end
-
 every 3 do
   gossip
 end
@@ -33,6 +16,22 @@ class Node < Sinatra::Base
   helpers Helpers
 
   configure do
+    # Set up Globals
+    $hostname = ENV.fetch("HOSTNAME")
+    peers = ENV.fetch("SEED") { "" }.split(",").reject { |peer| peer == $hostname }
+    $peers = Concurrent::Array.new(peers)
+    $transaction_pool = Concurrent::Array.new
+    $graylist = []
+
+    if $hostname == "master"
+      $wallet = Wallet.new
+      $blockchain = BlockChain.new($wallet)
+      # For demo convenience
+      puts "Wallet pubic key is #{$wallet.pub_key}".blue
+      File.write("/keys/key.pub", $wallet.pub_key)
+      puts "Wallet private key is #{$wallet.priv_key}".green
+      File.write("/keys/key", $wallet.priv_key)
+    end
     puts "My hostname is " + $hostname.green
   end
 
